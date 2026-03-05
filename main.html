@@ -343,6 +343,18 @@ p {
   display: block;
 }
 
+.slide-counter {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
 .prev, .next {
   cursor: pointer;
   background: white;
@@ -418,6 +430,7 @@ p {
   font-size: 18px;
   color: #444;
 }
+
 
 </style>
 </head>
@@ -825,11 +838,9 @@ VOC와 로그 그리고 전환율 등 정성 데이터부터 정량 데이터까
       <button class="next">&#10095;</button>
     </div>
 
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+   <div class="slide-counter" id="slideCounter">
+    1 / 16
+  </div>
 
   </div>
 </div>
