@@ -848,6 +848,27 @@ VOC와 로그 그리고 전환율 등 정성 데이터부터 정량 데이터까
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
+  // ===== 모달 열기/닫기 =====
+  const modal = document.getElementById("portfolioModal");
+  const openBtn = document.getElementById("openPortfolio");
+  const closeBtn = document.getElementById("closePortfolio");
+
+  openBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    modal.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // ===== 슬라이드 =====
   const slides = document.querySelectorAll(".slide");
   const counter = document.getElementById("slideCounter");
   let current = 0;
@@ -869,6 +890,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let prev = (current - 1 + slides.length) % slides.length;
     showSlide(prev);
   });
+
+  // 초기 표시
+  showSlide(0);
 
 });
 </script>
