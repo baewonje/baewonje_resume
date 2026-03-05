@@ -319,8 +319,8 @@ p {
 /* ===== SLIDER ===== */
 
 .slider {
-  position: relative;
-  max-width: 80%;
+  position: relative;   /* 반드시 있어야 함 */
+  max-width: 900px;
   margin: 40px auto;
   display: flex;
   align-items: center;
@@ -345,9 +345,8 @@ p {
 
 .slide-counter {
   position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 15px;   /* 음수 ❌ */
+  right: 20px;    /* 중앙 대신 우측이 더 세련됨 */
   background: rgba(0,0,0,0.6);
   color: white;
   padding: 6px 14px;
@@ -370,25 +369,6 @@ p {
 
 .prev { left: -50px; }
 .next { right: -50px; }
-
-.dots {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.dot {
-  height: 10px;
-  width: 10px;
-  margin: 0 5px;
-  background: #ccc;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.dot.active {
-  background: #2563eb;
-}
 
 /* ===== MODAL ===== */
 
