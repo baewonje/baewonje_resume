@@ -848,7 +848,7 @@ VOC와 로그 그리고 전환율 등 정성 데이터부터 정량 데이터까
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ===== 모달 열기/닫기 =====
+  // ===== 모달 =====
   const modal = document.getElementById("portfolioModal");
   const openBtn = document.getElementById("openPortfolio");
   const closeBtn = document.getElementById("closePortfolio");
@@ -871,25 +871,61 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===== 슬라이드 =====
   const slides = document.querySelectorAll(".slide");
   const counter = document.getElementById("slideCounter");
+  const nextBtn = document.querySelector(".next");
+  const prevBtn = document.querySelector(".prev");
+
   let current = 0;
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove("active"));
     slides[index].classList.add("active");
-
     counter.textContent = (index + 1) + " / " + slides.length;
     current = index;
   }
 
-  document.querySelector(".next").addEventListener("click", () => {
+  function nextSlide() {
     let next = (current + 1) % slides.length;
     showSlide(next);
-  });
+  }
 
-  document.querySelector(".prev").addEventListener("click", () => {
+  function prevSlide() {
     let prev = (current - 1 + slides.length) % slides.length;
     showSlide(prev);
+  }
+
+  nextBtn.addEventListener("click", nextSlide);
+  prevBtn.addEventListener("click", prevSlide);
+
+  // ===== 키보드 지원 =====
+  document.addEventListener("keydown", function(e) {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "Escape") modal.style.display = "none";
+    }
   });
+
+  // ===== 모바일 스와이프 =====
+  let startX = 0;
+  let endX = 0;
+
+  modal.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+  });
+
+  modal.addEventListener("touchend", function(e) {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const threshold = 50; // 최소 이동 거리
+    if (startX - endX > threshold) {
+      nextSlide(); // 왼쪽으로 스와이프 → 다음
+    } else if (endX - startX > threshold) {
+      prevSlide(); // 오른쪽으로 스와이프 → 이전
+    }
+  }
 
   // 초기 표시
   showSlide(0);
